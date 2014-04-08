@@ -623,7 +623,7 @@ bail:
 {
     if ([session isRunning])
     {
-        bool *isSaveable = YES;
+        bool *hideSaveButton = NO;
         // Find out the current orientation and tell the still image output.
         AVCaptureConnection *stillImageConnection = [stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
         UIDeviceOrientation curDeviceOrientation = [[UIDevice currentDevice] orientation];
@@ -640,7 +640,7 @@ bail:
                                                           if (error)
                                                           {
 //                                                              [self displayErrorOnMainQueue:error withMessage:@"Take picture failed"];
-                                                              __block isSaveable = NO;
+                                                              __block hideSaveButton = YES;
                                                           }
                                                           else
                                                           {
@@ -692,7 +692,7 @@ bail:
                               ];
                          }
          ];
-        [self.saveImage setHidden:!isSaveable];
+        [self.saveImage setHidden:hideSaveButton];
     }
     else
     {
