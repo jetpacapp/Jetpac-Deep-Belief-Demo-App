@@ -121,6 +121,17 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     labelLayers = [[NSMutableArray alloc] init];
     
     oldPredictionValues = [[NSMutableDictionary alloc] init];
+    
+    gradientLayer = [[UIView alloc] init];
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    
+    gradient.frame = previewView.bounds;
+    [gradient setFrame:CGRectMake(0, 0, previewView.bounds.size.width, previewView.bounds.size.height / 2.0)];
+    [gradient setColors:[NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor clearColor] CGColor], nil]];
+    [gradientLayer.layer insertSublayer:gradient atIndex:0];
+    [previewView addSubview:gradientLayer];
+    [previewView bringSubviewToFront:gradientLayer];
+//    [gradientLayer setHidden:YES];
 }
 
 - (void)viewDidUnload
@@ -598,6 +609,9 @@ bail:
     
     [actionButton setHidden:YES];
     [self.saveImage setHidden:YES];
+    
+    [previewView bringSubviewToFront:gradientLayer];
+//    [gradientLayer setHidden:NO];
 
     UIGraphicsBeginImageContext(self.view.bounds.size);
     [[self.view layer] renderInContext:UIGraphicsGetCurrentContext()];
@@ -623,7 +637,7 @@ bail:
 
     if (error)
     {
-        NSLog(@"here - error");
+//        NSLog(@"here - error");
         
 //        [self displayErrorOnMainQueue:error withMessage:@"Save picture failed"];
         [alert setTitle:@"Image Save Failed"];
@@ -631,7 +645,7 @@ bail:
     }
     else
     {
-        NSLog(@"here - worked");
+//        NSLog(@"here - worked");
     }
     [alert show];
 }
@@ -839,7 +853,7 @@ bail:
 	});
 }
 
-- (void) removeAllLabelLayers
+- (void)removeAllLabelLayers
 {
     for (CATextLayer* layer in labelLayers)
     {
@@ -848,7 +862,7 @@ bail:
     [labelLayers removeAllObjects];
 }
 
-- (void) addLabelLayerWithText: (NSString*) text
+- (void)addLabelLayerWithText: (NSString*) text
                        originX:(float) originX originY:(float) originY
                          width:(float) width height:(float) height
                      alignment:(NSString*) alignment
@@ -956,7 +970,7 @@ bail:
     });
 }
 
-- (void) setPredictionValues: (NSDictionary*) newValues
+- (void)setPredictionValues: (NSDictionary*) newValues
 {
     const float decayValue = 0.75f;
     const float updateValue = 0.25f;
@@ -1020,6 +1034,15 @@ bail:
     const float labelMarginY = 5.0f;
     
     [self removeAllLabelLayers];
+    
+//    if ([sortedLabels count] > 0)
+//    {
+//        [gradientLayer setHidden:NO];
+//    }
+//    else
+//    {
+//        [gradientLayer setHidden:YES];
+//    }
     
     int labelCount = 0;
     for (NSDictionary* entry in sortedLabels)

@@ -35,6 +35,7 @@
     NSMutableDictionary* oldPredictionValues;
     NSMutableArray* labelLayers;
     AVCaptureSession* session;
+    UIView *gradientLayer;
 }
 
 @property (retain, nonatomic) CATextLayer *predictionTextLayer;
