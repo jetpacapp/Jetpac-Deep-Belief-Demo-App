@@ -35,13 +35,13 @@
                                 <rect key="frame" x="262" y="499" width="48" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <inset key="contentEdgeInsets" minX="-10" minY="-10" maxX="-10" maxY="-10"/>
-                                <state key="normal" image="Nav_Share.png" backgroundImage="Nav_Share.png"/>
+                                <state key="normal" backgroundImage="Nav_Share.png"/>
                                 <connections>
                                     <action selector="savePicture:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="qST-V3-sKq"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.13046930360685946" green="0.12974042481575968" blue="0.13119818239795922" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <outlet property="previewView" destination="eB0-cj-Dz2" id="C4p-QG-kgC"/>

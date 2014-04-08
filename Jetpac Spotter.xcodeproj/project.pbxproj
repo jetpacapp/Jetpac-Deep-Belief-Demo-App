@@ -39,6 +39,7 @@
 		A3DB186A18EF69660029E082 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3DB186918EF69660029E082 /* XCTest.framework */; };
 		A3DB186B18EF69660029E082 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3DB184718EF69660029E082 /* Foundation.framework */; };
 		A3DB186C18EF69660029E082 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3DB184B18EF69660029E082 /* UIKit.framework */; };
+		A3EC663318F4AE7F00D4E1D7 /* Nav_Share_Saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3EC663218F4AE7F00D4E1D7 /* Nav_Share_Saved@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		A3DB186218EF69660029E082 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A3DB186818EF69660029E082 /* Jetpac SpotterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Jetpac SpotterTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3DB186918EF69660029E082 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		A3EC663218F4AE7F00D4E1D7 /* Nav_Share_Saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Nav_Share_Saved@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 			children = (
 				A34B32E418F3344900400A6B /* jetpac.ntwk */,
 				A34B32EA18F354A900400A6B /* Nav_Share@2x.png */,
+				A3EC663218F4AE7F00D4E1D7 /* Nav_Share_Saved@2x.png */,
 				A34B32E818F3513A00400A6B /* launch@1x.png */,
 				A34B32E618F350A500400A6B /* launch@2x.png */,
 				A33BB0F718F31C7800728D04 /* squarePNG.png */,
@@ -283,6 +286,7 @@
 				A3DB185E18EF69660029E082 /* Main_iPad.storyboard in Resources */,
 				A3D1B65D18EF6D4E000520CF /* Icon-152.png in Resources */,
 				A3D1B65B18EF6D4E000520CF /* Icon-114.png in Resources */,
+				A3EC663318F4AE7F00D4E1D7 /* Nav_Share_Saved@2x.png in Resources */,
 				A3D1B65818EF6D4E000520CF /* Icon-58.png in Resources */,
 				A3DB186318EF69660029E082 /* Images.xcassets in Resources */,
 				A34B32E718F350A500400A6B /* launch@2x.png in Resources */,

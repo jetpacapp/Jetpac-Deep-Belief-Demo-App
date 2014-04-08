@@ -95,7 +95,8 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     
     [[UIApplication sharedApplication] setStatusBarHidden: NO withAnimation:UIStatusBarAnimationSlide];
 //    [self.view setBackgroundColor:[UIColor colorWithRed:73.0/255.0 green:162.0/255.0 blue:191.0/255.0 alpha:1.0]];
-    [self.view setBackgroundColor:[UIColor blackColor]];
+    [self.view setBackgroundColor:[UIColor colorWithRed:34.0/255.0 green:34.0/255.0 blue:34.0/255.0 alpha:1.0]];
+//    [self.view setBackgroundColor:[UIColor blackColor]];
     
     NSString* networkPath = [[NSBundle mainBundle] pathForResource:@"jetpac" ofType:@"ntwk"];
     if (networkPath == NULL)
@@ -297,11 +298,9 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     [actionButton.layer setCornerRadius:37.0];
     [actionButton.layer setBorderColor:[UIColor whiteColor].CGColor];
     
-    [actionButton.layer setBackgroundColor:[UIColor redColor].CGColor];
-//    [button.layer setBackgroundColor:[UIColor colorWithRed:191.0/255.0 green:41.0/255.0 blue:66.0/255.0 alpha:1.0].CGColor];
-    
-//    [button setColor:[UIColor redColor] forState:UIControlStateNormal];
-//    [button setColor:[UIColor greenColor] forState:UIControlStateHighlighted];
+//    [actionButton.layer setBackgroundColor:[UIColor redColor].CGColor];
+//    [actionButton.layer setBackgroundColor:[UIColor colorWithRed:34.0/255.0 green:34.0/255.0 blue:34.0/255.0 alpha:1.0].CGColor];
+    [actionButton.layer setBackgroundColor:[UIColor blackColor].CGColor];
     
     [actionButton.layer setBorderWidth:3];
     [actionButton.layer setMasksToBounds:YES];
@@ -604,25 +603,44 @@ bail:
     [[self.view layer] renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *tempScreenshot = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-
-    UIImageWriteToSavedPhotosAlbum(tempScreenshot, nil, nil, nil);
     
+    UIImageWriteToSavedPhotosAlbum(tempScreenshot, self, @selector(writeImageCompletion:didFinishSavingWithError:contextInfo:), nil);
+    
+    [self.saveImage setHidden:NO];
+    [actionButton setHidden:NO];
+    [fakeView removeFromSuperview];
+    
+    [self.saveImage setBackgroundImage:[UIImage imageNamed:@"Nav_Share_Saved@2x.png"] forState:UIControlStateNormal];
+}
+
+- (void)writeImageCompletion:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Image Saved"
                                                     message:@"The prediction image has been saved to your camera roll."
                                                    delegate:self
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
+
+    if (error)
+    {
+        NSLog(@"here - error");
+        
+//        [self displayErrorOnMainQueue:error withMessage:@"Save picture failed"];
+        [alert setTitle:@"Image Save Failed"];
+        [alert setMessage:@"Something went wrong saving the image. Check the app permissions."];
+    }
+    else
+    {
+        NSLog(@"here - worked");
+    }
     [alert show];
-    
-    [self.saveImage setHidden:NO];
-    [actionButton setHidden:NO];
-    [fakeView removeFromSuperview];
 }
 
 - (IBAction)takePicture:(id)sender
 {
     if ([session isRunning])
     {
+        [actionButton.layer setBackgroundColor:[UIColor redColor].CGColor];
         bool *hideSaveButton = NO;
         // Find out the current orientation and tell the still image output.
         AVCaptureConnection *stillImageConnection = [stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
@@ -693,9 +711,12 @@ bail:
                          }
          ];
         [self.saveImage setHidden:hideSaveButton];
+        [self.saveImage setBackgroundImage:[UIImage imageNamed:@"Nav_Share@2x.png"] forState:UIControlStateNormal];
     }
     else
     {
+//        [actionButton.layer setBackgroundColor:[UIColor colorWithRed:34.0/255.0 green:34.0/255.0 blue:34.0/255.0 alpha:1.0].CGColor];
+        [actionButton.layer setBackgroundColor:[UIColor blackColor].CGColor];
         [self.saveImage setHidden:YES];
         [session startRunning];
         [sender setTitle: @"Spot" forState:UIControlStateNormal];
