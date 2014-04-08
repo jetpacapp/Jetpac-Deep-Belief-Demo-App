@@ -31,11 +31,21 @@
                                 <color key="textColor" red="0.60897640306122447" green="0.60897640306122447" blue="0.60897640306122447" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yyt-PW-5fH">
+                                <rect key="frame" x="262" y="499" width="48" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="-10" minY="-10" maxX="-10" maxY="-10"/>
+                                <state key="normal" image="Nav_Share.png" backgroundImage="Nav_Share.png"/>
+                                <connections>
+                                    <action selector="savePicture:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="qST-V3-sKq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="previewView" destination="eB0-cj-Dz2" id="C4p-QG-kgC"/>
+                        <outlet property="saveImage" destination="yyt-PW-5fH" id="k0A-Id-YJ3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -43,6 +53,9 @@
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="Nav_Share.png" width="48" height="60"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

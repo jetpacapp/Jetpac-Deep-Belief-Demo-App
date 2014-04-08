@@ -13,6 +13,10 @@
 		A34B32E118F3324D00400A6B /* DeepBelief.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A34B32E018F3324D00400A6B /* DeepBelief.framework */; };
 		A34B32E318F332E800400A6B /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A34B32E218F332E800400A6B /* Accelerate.framework */; };
 		A34B32E518F3344900400A6B /* jetpac.ntwk in Resources */ = {isa = PBXBuildFile; fileRef = A34B32E418F3344900400A6B /* jetpac.ntwk */; };
+		A34B32E718F350A500400A6B /* launch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A34B32E618F350A500400A6B /* launch@2x.png */; };
+		A34B32E918F3513A00400A6B /* launch@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = A34B32E818F3513A00400A6B /* launch@1x.png */; };
+		A34B32EB18F354AA00400A6B /* Nav_Share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A34B32EA18F354A900400A6B /* Nav_Share@2x.png */; };
+		A34B32ED18F35F6200400A6B /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A34B32EC18F35F6200400A6B /* AssetsLibrary.framework */; };
 		A3D1B65518EF6D4E000520CF /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D1B64C18EF6D4E000520CF /* Icon-29.png */; };
 		A3D1B65618EF6D4E000520CF /* Icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D1B64D18EF6D4E000520CF /* Icon-40.png */; };
 		A3D1B65718EF6D4E000520CF /* Icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D1B64E18EF6D4E000520CF /* Icon-57.png */; };
@@ -55,6 +59,10 @@
 		A34B32E018F3324D00400A6B /* DeepBelief.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DeepBelief.framework; path = ../DeepBeliefSDK/DeepBelief.framework; sourceTree = "<group>"; };
 		A34B32E218F332E800400A6B /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		A34B32E418F3344900400A6B /* jetpac.ntwk */ = {isa = PBXFileReference; lastKnownFileType = file; path = jetpac.ntwk; sourceTree = "<group>"; };
+		A34B32E618F350A500400A6B /* launch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch@2x.png"; sourceTree = "<group>"; };
+		A34B32E818F3513A00400A6B /* launch@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch@1x.png"; sourceTree = "<group>"; };
+		A34B32EA18F354A900400A6B /* Nav_Share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Nav_Share@2x.png"; sourceTree = "<group>"; };
+		A34B32EC18F35F6200400A6B /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		A3D1B64C18EF6D4E000520CF /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
 		A3D1B64D18EF6D4E000520CF /* Icon-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40.png"; sourceTree = "<group>"; };
 		A3D1B64E18EF6D4E000520CF /* Icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-57.png"; sourceTree = "<group>"; };
@@ -87,6 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A34B32ED18F35F6200400A6B /* AssetsLibrary.framework in Frameworks */,
 				A34B32E318F332E800400A6B /* Accelerate.framework in Frameworks */,
 				A34B32E118F3324D00400A6B /* DeepBelief.framework in Frameworks */,
 				A33BB0F618EF7CFD00728D04 /* QuartzCore.framework in Frameworks */,
@@ -130,6 +139,7 @@
 		A3DB184618EF69660029E082 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A34B32EC18F35F6200400A6B /* AssetsLibrary.framework */,
 				A34B32E218F332E800400A6B /* Accelerate.framework */,
 				A34B32E018F3324D00400A6B /* DeepBelief.framework */,
 				A33BB0F518EF7CFD00728D04 /* QuartzCore.framework */,
@@ -161,6 +171,9 @@
 			isa = PBXGroup;
 			children = (
 				A34B32E418F3344900400A6B /* jetpac.ntwk */,
+				A34B32EA18F354A900400A6B /* Nav_Share@2x.png */,
+				A34B32E818F3513A00400A6B /* launch@1x.png */,
+				A34B32E618F350A500400A6B /* launch@2x.png */,
 				A33BB0F718F31C7800728D04 /* squarePNG.png */,
 				A3D1B64C18EF6D4E000520CF /* Icon-29.png */,
 				A3D1B64D18EF6D4E000520CF /* Icon-40.png */,
@@ -266,11 +279,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A34B32E918F3513A00400A6B /* launch@1x.png in Resources */,
 				A3DB185E18EF69660029E082 /* Main_iPad.storyboard in Resources */,
 				A3D1B65D18EF6D4E000520CF /* Icon-152.png in Resources */,
 				A3D1B65B18EF6D4E000520CF /* Icon-114.png in Resources */,
 				A3D1B65818EF6D4E000520CF /* Icon-58.png in Resources */,
 				A3DB186318EF69660029E082 /* Images.xcassets in Resources */,
+				A34B32E718F350A500400A6B /* launch@2x.png in Resources */,
 				A3D1B65C18EF6D4E000520CF /* Icon-120.png in Resources */,
 				A3D1B65618EF6D4E000520CF /* Icon-40.png in Resources */,
 				A34B32E518F3344900400A6B /* jetpac.ntwk in Resources */,
@@ -280,6 +295,7 @@
 				A3DB185218EF69660029E082 /* InfoPlist.strings in Resources */,
 				A3D1B65518EF6D4E000520CF /* Icon-29.png in Resources */,
 				A33BB0F818F31C7800728D04 /* squarePNG.png in Resources */,
+				A34B32EB18F354AA00400A6B /* Nav_Share@2x.png in Resources */,
 				A3D1B65918EF6D4E000520CF /* Icon-76.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

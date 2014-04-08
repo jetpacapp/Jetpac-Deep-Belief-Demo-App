@@ -14,6 +14,7 @@
 #import <AssertMacros.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #include <sys/time.h>
+#import "QuartzCore/QuartzCore.h"
 
 #import <DeepBelief/DeepBelief.h>
 
@@ -109,7 +110,9 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     square = [UIImage imageNamed:@"squarePNG"];
 	NSDictionary *detectorOptions = [[NSDictionary alloc] initWithObjectsAndKeys:CIDetectorAccuracyLow, CIDetectorAccuracy, nil];
 	faceDetector = [CIDetector detectorOfType:CIDetectorTypeFace context:nil options:detectorOptions];
-
+    
+    [self.saveImage setHidden:YES];
+    
     [self createButton];
     
     synth = [[AVSpeechSynthesizer alloc] init];
@@ -285,27 +288,27 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 
 - (void)createButton
 {
-    CustomButton *button = [CustomButton buttonWithType:UIButtonTypeCustom];
-    [button addTarget:self action:@selector(takePicture:) forControlEvents:UIControlEventTouchUpInside];
-    [button setTitle:@"Spot" forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.5] forState:UIControlStateHighlighted];
+    actionButton = [CustomButton buttonWithType:UIButtonTypeCustom];
+    [actionButton addTarget:self action:@selector(takePicture:) forControlEvents:UIControlEventTouchUpInside];
+    [actionButton setTitle:@"Spot" forState:UIControlStateNormal];
+    [actionButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [actionButton setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.5] forState:UIControlStateHighlighted];
 
-    [button.layer setCornerRadius:37.0];
-    [button.layer setBorderColor:[UIColor whiteColor].CGColor];
+    [actionButton.layer setCornerRadius:37.0];
+    [actionButton.layer setBorderColor:[UIColor whiteColor].CGColor];
     
-    [button.layer setBackgroundColor:[UIColor redColor].CGColor];
+    [actionButton.layer setBackgroundColor:[UIColor redColor].CGColor];
 //    [button.layer setBackgroundColor:[UIColor colorWithRed:191.0/255.0 green:41.0/255.0 blue:66.0/255.0 alpha:1.0].CGColor];
     
 //    [button setColor:[UIColor redColor] forState:UIControlStateNormal];
 //    [button setColor:[UIColor greenColor] forState:UIControlStateHighlighted];
     
-    [button.layer setBorderWidth:3];
-    [button.layer setMasksToBounds:YES];
+    [actionButton.layer setBorderWidth:3];
+    [actionButton.layer setMasksToBounds:YES];
 //    [button setFrame:CGRectMake((self.view.bounds.size.width / 2.0) - 50.0, self.view.bounds.size.height - 110.0, 100.0, 100.0)];
-    [button setFrame:CGRectMake((self.view.bounds.size.width / 2.0) - 37.0, self.view.bounds.size.height - 77.0, 74.0, 74.0)];
+    [actionButton setFrame:CGRectMake((self.view.bounds.size.width / 2.0) - 37.0, self.view.bounds.size.height - 77.0, 74.0, 74.0)];
 //    [button setContentEdgeInsets:UIEdgeInsetsMake(25, 0, 25, 0)];
-    [self.view addSubview:button];
+    [self.view addSubview:actionButton];
 }
 
 - (void)setupAVCapture
@@ -316,12 +319,10 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
         [session setSessionPreset:AVCaptureSessionPreset640x480];
-        NSLog(@"here");
     }
 	else
     {
         [session setSessionPreset:AVCaptureSessionPresetPhoto];
-        NSLog(@"here1");
     }
 	
     // Select a video device, make an input
@@ -367,26 +368,15 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     
 	effectiveScale = 1.0;
 	previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
-//    [self.view setBounds:CGRectMake(0, 0, 320.0f, 568.0f)];
-//    [previewLayer setBounds:CGRectMake(0, 0, 320.0f, 568.0f)];
-//    [previewLayer setFrame:CGRectMake(0, 0, 320.0f, 568.0f)];
 	[previewLayer setBackgroundColor:[[UIColor blackColor] CGColor]];
 	[previewLayer setVideoGravity:AVLayerVideoGravityResizeAspect];
 	CALayer *rootLayer = [previewView layer];
 	[rootLayer setMasksToBounds:YES];
-//    NSLog(@"width: %f", rootLayer.bounds.size.width);
-//    NSLog(@"height: %f", rootLayer.bounds.size.height);
-//    [rootLayer setBounds:CGRectMake(0, 0, 320.0f, 568.0f)];
-//    NSLog(@"width: %f", rootLayer.bounds.size.width);
-//    NSLog(@"height: %f", rootLayer.bounds.size.height);
-    
-    //    [previewView setBounds:CGRectMake(0, 0, rootLayer.bounds.size.width, rootLayer.bounds.size.height)];
+
     [previewLayer setBounds:CGRectMake(0, 0, rootLayer.bounds.size.width, rootLayer.bounds.size.height)];
 	[previewLayer setFrame:[rootLayer bounds]];
 	[rootLayer addSublayer:previewLayer];
 	[session startRunning];
-    
-    NSLog(@"%@", [self.view subviews]);
 bail:
 	if (error)
     {
@@ -598,10 +588,79 @@ bail:
     [self runCNNOnFrame:pixelBuffer];
 }
 
+- (IBAction)savePicture:(id)sender
+{
+//    NSLog(@"hello!");
+
+    UIView *fakeView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, previewView.bounds.size.width, previewView.bounds.size.height)];
+    UIImageView * screenshotView = [[UIImageView alloc] initWithImage:screenshot];
+//    screenshotView.frame =
+    [fakeView addSubview:screenshotView];
+    [previewView addSubview:fakeView];
+//    [self.view sendSubviewToBack:fakeView];
+    
+    [actionButton setHidden:YES];
+    [self.saveImage setHidden:YES];
+
+    UIGraphicsBeginImageContext(self.view.bounds.size);
+    [[self.view layer] renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *tempScreenshot = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    UIImageWriteToSavedPhotosAlbum(tempScreenshot, nil, nil, nil);
+    
+    [self.saveImage setHidden:NO];
+    [actionButton setHidden:NO];
+    [fakeView removeFromSuperview];
+}
+
 - (IBAction)takePicture:(id)sender
 {
     if ([session isRunning])
     {
+        // Find out the current orientation and tell the still image output.
+        AVCaptureConnection *stillImageConnection = [stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
+        UIDeviceOrientation curDeviceOrientation = [[UIDevice currentDevice] orientation];
+        AVCaptureVideoOrientation avcaptureOrientation = [self avOrientationForDeviceOrientation:curDeviceOrientation];
+        [stillImageConnection setVideoOrientation:avcaptureOrientation];
+        [stillImageConnection setVideoScaleAndCropFactor:effectiveScale];
+        
+        // set the appropriate pixel format / image type output setting depending on if we'll need an uncompressed image for
+        // the possiblity of drawing the red square over top or if we're just writing a jpeg to the camera roll which is the trival case
+        [stillImageOutput setOutputSettings:[NSDictionary dictionaryWithObject:AVVideoCodecJPEG forKey:AVVideoCodecKey]];
+        
+        [stillImageOutput captureStillImageAsynchronouslyFromConnection:stillImageConnection
+                                                      completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
+                                                          if (error)
+                                                          {
+                                                              [self displayErrorOnMainQueue:error withMessage:@"Take picture failed"];
+                                                          }
+                                                          else
+                                                          {
+                                                              
+                                                              // trivial simple JPEG case
+                                                              NSData *jpegData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+                                                              
+                                                              screenshot = [UIImage imageWithData:jpegData];
+                                                              
+                                                              //                                                              CFDictionaryRef attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault, imageDataSampleBuffer, kCMAttachmentMode_ShouldPropagate);
+                                                              //                                                              ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+                                                              //                                                              [library writeImageDataToSavedPhotosAlbum:jpegData metadata:(__bridge id)attachments completionBlock:^(NSURL *assetURL, NSError *error) {
+                                                              //                                                                      if (error)
+                                                              //                                                                      {
+                                                              //                                                                          [self displayErrorOnMainQueue:error withMessage:@"Save to camera roll failed"];
+                                                              //                                                                      }
+                                                              //                                                              }];
+                                                              //
+                                                              //                                                              if (attachments)
+                                                              //                                                              {
+                                                              //                                                                  CFRelease(attachments);
+                                                              //                                                              }
+                                                          }
+                                                      }
+         ];
+        
+        
         [session stopRunning];
         [sender setTitle: @"Again?" forState:UIControlStateNormal];
         
@@ -626,9 +685,11 @@ bail:
                               ];
                          }
          ];
+        [self.saveImage setHidden:NO];
     }
     else
     {
+        [self.saveImage setHidden:YES];
         [session startRunning];
         [sender setTitle: @"Spot" forState:UIControlStateNormal];
     }
