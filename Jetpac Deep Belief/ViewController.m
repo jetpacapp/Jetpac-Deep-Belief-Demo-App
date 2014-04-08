@@ -594,10 +594,8 @@ bail:
 
     UIView *fakeView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, previewView.bounds.size.width, previewView.bounds.size.height)];
     UIImageView * screenshotView = [[UIImageView alloc] initWithImage:screenshot];
-//    screenshotView.frame =
     [fakeView addSubview:screenshotView];
     [previewView addSubview:fakeView];
-//    [self.view sendSubviewToBack:fakeView];
     
     [actionButton setHidden:YES];
     [self.saveImage setHidden:YES];
@@ -609,6 +607,13 @@ bail:
 
     UIImageWriteToSavedPhotosAlbum(tempScreenshot, nil, nil, nil);
     
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Image Saved"
+                                                    message:@"The prediction image has been saved to your camera roll."
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+    
     [self.saveImage setHidden:NO];
     [actionButton setHidden:NO];
     [fakeView removeFromSuperview];
@@ -618,6 +623,7 @@ bail:
 {
     if ([session isRunning])
     {
+        bool *isSaveable = YES;
         // Find out the current orientation and tell the still image output.
         AVCaptureConnection *stillImageConnection = [stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
         UIDeviceOrientation curDeviceOrientation = [[UIDevice currentDevice] orientation];
@@ -633,7 +639,8 @@ bail:
                                                       completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
                                                           if (error)
                                                           {
-                                                              [self displayErrorOnMainQueue:error withMessage:@"Take picture failed"];
+//                                                              [self displayErrorOnMainQueue:error withMessage:@"Take picture failed"];
+                                                              __block isSaveable = NO;
                                                           }
                                                           else
                                                           {
@@ -685,7 +692,7 @@ bail:
                               ];
                          }
          ];
-        [self.saveImage setHidden:NO];
+        [self.saveImage setHidden:!isSaveable];
     }
     else
     {

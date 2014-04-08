@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>7BBA1149-7080-42F0-B3C7-4269D8025550</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Jetpac Spotter</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>B34CB9CC-A02D-4618-99FF-8DC543D6099B</key>
+		<string>https://github.com/jetpacapp/DeepBeliefSDK.git</string>
+		<key>F9FDF218-825C-4EFD-A8E2-8AB92D720FE1</key>
+		<string>https://github.com/jetpacapp/Jetpac-Deep-Belief-Demo-App.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Jetpac Spotter.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>B34CB9CC-A02D-4618-99FF-8DC543D6099B</key>
+		<string>../../../DeepBeliefSDK</string>
+		<key>F9FDF218-825C-4EFD-A8E2-8AB92D720FE1</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/jetpacapp/Jetpac-Deep-Belief-Demo-App.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F9FDF218-825C-4EFD-A8E2-8AB92D720FE1</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B34CB9CC-A02D-4618-99FF-8DC543D6099B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DeepBeliefSDK</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F9FDF218-825C-4EFD-A8E2-8AB92D720FE1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Jetpac Deep Belief</string>
+		</dict>
+	</array>
+</dict>
+</plist>
