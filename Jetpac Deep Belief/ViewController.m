@@ -139,7 +139,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 
     [self.view bringSubviewToFront:introView];
 
-    [NSTimer scheduledTimerWithTimeInterval:2.0
+    [NSTimer scheduledTimerWithTimeInterval:5.0
                                      target:self
                                    selector:@selector(postTimerFinishLoading:)
                                    userInfo:nil
