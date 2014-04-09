@@ -14,6 +14,7 @@
 #import <AssertMacros.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #include <sys/time.h>
+#import <sys/utsname.h>
 #import "QuartzCore/QuartzCore.h"
 
 #import <DeepBelief/DeepBelief.h>
@@ -92,6 +93,10 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 {
     [super viewDidLoad];
     
+    iphoneModel = [self machineName];
+    
+    [self setupScreenElements];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
     
@@ -144,6 +149,52 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
                                    selector:@selector(postTimerFinishLoading:)
                                    userInfo:nil
                                     repeats:NO];
+}
+
+- (void)setupScreenElements
+{
+    if ([iphoneModel  isEqual: @"iPhone3,1"] || [iphoneModel  isEqual: @"iPhone4,1"])
+    {
+//        short version
+        CGRect viewFrame = previewView.frame;
+        CGSize newSize = CGSizeMake(viewFrame.size.width, viewFrame.size.height - 90.0);
+        viewFrame.size = newSize;
+        [previewView setFrame:viewFrame];
+        [previewView setBackgroundColor:[UIColor colorWithRed:17.0/255.0 green:17.0/255.0 blue:17.0/255.0 alpha:1.0]];
+        [introView setFrame:viewFrame];
+        
+        CGRect frame = self.saveImage.frame;
+        frame.origin.x = frame.origin.x; // new x coordinate
+        frame.origin.y = self.view.frame.size.height - 70.0; // new y coordinate
+        [self.saveImage setFrame:frame];
+
+        [self.view setBackgroundColor:[UIColor colorWithRed:17.0/255.0 green:17.0/255.0 blue:17.0/255.0 alpha:1.0]];
+    } else {
+//        tall version
+    }
+}
+
+- (NSString*)machineName
+{
+//    @"i386"      on the simulator
+//    @"iPod1,1"   on iPod Touch
+//    @"iPod2,1"   on iPod Touch Second Generation
+//    @"iPod3,1"   on iPod Touch Third Generation
+//    @"iPod4,1"   on iPod Touch Fourth Generation
+//    @"iPhone1,1" on iPhone
+//    @"iPhone1,2" on iPhone 3G
+//    @"iPhone2,1" on iPhone 3GS
+//    @"iPad1,1"   on iPad
+//    @"iPad2,1"   on iPad 2
+//    @"iPad3,1"   on iPad 3 (aka new iPad)
+//    @"iPhone3,1" on iPhone 4
+//    @"iPhone4,1" on iPhone 4S
+//    @"iPhone5,1" on iPhone 5
+//    @"iPhone5,2" on iPhone 5
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    
+    return [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
 }
 
 - (void)postTimerFinishLoading:(NSTimer *)timer
@@ -697,8 +748,8 @@ bail:
 
 - (void)writeImageCompletion:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Image Saved"
-                                                    message:@"The prediction image has been saved to your camera roll."
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Saved to photos"
+                                                    message:@""
                                                    delegate:self
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
@@ -739,8 +790,9 @@ bail:
                                                       completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
                                                           if (error)
                                                           {
-//                                                              [self displayErrorOnMainQueue:error withMessage:@"Take picture failed"];
+                                                              [self displayErrorOnMainQueue:error withMessage:@"Take picture failed"];
                                                               __block hideSaveButton = YES;
+                                                              NSLog(@"woah!");
                                                           }
                                                           else
                                                           {

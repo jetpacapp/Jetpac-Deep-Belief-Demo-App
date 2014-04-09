@@ -37,6 +37,8 @@
     AVCaptureSession* session;
     UIView *gradientLayer;
     IBOutlet UIView *introView;
+    
+    NSString *iphoneModel;
 }
 
 @property (retain, nonatomic) CATextLayer *predictionTextLayer;
