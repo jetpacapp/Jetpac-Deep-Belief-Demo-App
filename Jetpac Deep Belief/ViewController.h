@@ -36,6 +36,7 @@
     NSMutableArray* labelLayers;
     AVCaptureSession* session;
     UIView *gradientLayer;
+    IBOutlet UIView *introView;
 }
 
 @property (retain, nonatomic) CATextLayer *predictionTextLayer;

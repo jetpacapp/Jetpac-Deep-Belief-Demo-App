@@ -111,6 +111,46 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     square = [UIImage imageNamed:@"squarePNG"];
 	NSDictionary *detectorOptions = [[NSDictionary alloc] initWithObjectsAndKeys:CIDetectorAccuracyLow, CIDetectorAccuracy, nil];
 	faceDetector = [CIDetector detectorOfType:CIDetectorTypeFace context:nil options:detectorOptions];
+//    
+//    [self.saveImage setHidden:YES];
+//    
+//    [self createButton];
+//    
+//    synth = [[AVSpeechSynthesizer alloc] init];
+//    
+//    labelLayers = [[NSMutableArray alloc] init];
+//    
+//    oldPredictionValues = [[NSMutableDictionary alloc] init];
+//    
+//    gradientLayer = [[UIView alloc] init];
+//    CAGradientLayer *gradient = [CAGradientLayer layer];
+//    
+//    gradient.frame = previewView.bounds;
+//    [gradient setFrame:CGRectMake(0, 0, previewView.bounds.size.width, previewView.bounds.size.height / 2.0)];
+//    [gradient setColors:[NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor clearColor] CGColor], nil]];
+//    [gradientLayer.layer insertSublayer:gradient atIndex:0];
+//    [previewView addSubview:gradientLayer];
+//    [previewView bringSubviewToFront:gradientLayer];
+//    [gradientLayer setHidden:YES];
+    
+    [self.saveImage setHidden:YES];
+
+    [self.view bringSubviewToFront:introView];
+
+    [NSTimer scheduledTimerWithTimeInterval:5.0
+                                     target:self
+                                   selector:@selector(postTimerFinishLoading:)
+                                   userInfo:nil
+                                    repeats:NO];
+}
+
+- (void)postTimerFinishLoading:(NSTimer *)timer
+{
+    [timer invalidate];
+    timer = nil;
+    
+    [introView setHidden:YES];
+    [introView removeFromSuperview];
     
     [self.saveImage setHidden:YES];
     
@@ -131,7 +171,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     [gradientLayer.layer insertSublayer:gradient atIndex:0];
     [previewView addSubview:gradientLayer];
     [previewView bringSubviewToFront:gradientLayer];
-//    [gradientLayer setHidden:YES];
+    //    [gradientLayer setHidden:YES];
 }
 
 - (void)viewDidUnload
@@ -216,7 +256,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 
 - (void)dealloc
 {
-    [self teardownAVCapture];
+//    [self teardownAVCapture];
 }
 
 - (IBAction)switchCameras:(id)sender
@@ -966,7 +1006,10 @@ bail:
         }
     }
     dispatch_async(dispatch_get_main_queue(), ^(void) {
-        [self setPredictionValues: newValues];
+        if ([introView isHidden])
+        {
+            [self setPredictionValues: newValues];
+        }
     });
 }
 
