@@ -91,6 +91,10 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
+    
 	// Do any additional setup after loading the view, typically from a nib.
     
     [[UIApplication sharedApplication] setStatusBarHidden: NO withAnimation:UIStatusBarAnimationSlide];
@@ -137,7 +141,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 
     [self.view bringSubviewToFront:introView];
 
-    [NSTimer scheduledTimerWithTimeInterval:5.0
+    [NSTimer scheduledTimerWithTimeInterval:2.0
                                      target:self
                                    selector:@selector(postTimerFinishLoading:)
                                    userInfo:nil
@@ -182,11 +186,13 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+//    NSLog(@"view will appear");
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+//    NSLog(@"view did appear");
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -204,6 +210,123 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)appDidBecomeActive:(NSNotification *)notification
+{
+//    NSLog(@"did become active notification");
+}
+
+- (void)appDidEnterForeground:(NSNotification *)notification
+{
+//    NSLog(@"did enter foreground notification");
+    [actionButton.layer setBackgroundColor:[UIColor colorWithRed:92.0/255.0 green:92.0/255.0 blue:92.0/255.0 alpha:1.0].CGColor];
+    [self.saveImage setHidden:YES];
+    [session startRunning];
+    [actionButton setTitle: @"Snap" forState:UIControlStateNormal];
+}
+
+
+//At launch, the output looks like this:
+//
+//2013-04-07 09:31:06.505 myapp[15459:11303] view did load
+//2013-04-07 09:31:06.507 myapp[15459:11303] view will appear
+//2013-04-07 09:31:06.511 myapp[15459:11303] app did become active
+//2013-04-07 09:31:06.512 myapp[15459:11303] did become active notification
+//2013-04-07 09:31:06.517 myapp[15459:11303] view did appear
+//Enter the background then reenter the foreground:
+//
+//2013-04-07 09:32:05.923 myapp[15459:11303] app will enter foreground
+//2013-04-07 09:32:05.924 myapp[15459:11303] did enter foreground notification
+//2013-04-07 09:32:05.925 myapp[15459:11303] app did become active
+//2013-04-07 09:32:05.926 myapp[15459:11303] did become active notification
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -342,7 +465,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 {
     actionButton = [CustomButton buttonWithType:UIButtonTypeCustom];
     [actionButton addTarget:self action:@selector(takePicture:) forControlEvents:UIControlEventTouchUpInside];
-    [actionButton setTitle:@"Spot" forState:UIControlStateNormal];
+    [actionButton setTitle:@"Snap" forState:UIControlStateNormal];
     [actionButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [actionButton setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.5] forState:UIControlStateHighlighted];
 
@@ -350,8 +473,8 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     [actionButton.layer setBorderColor:[UIColor whiteColor].CGColor];
     
 //    [actionButton.layer setBackgroundColor:[UIColor redColor].CGColor];
-//    [actionButton.layer setBackgroundColor:[UIColor colorWithRed:34.0/255.0 green:34.0/255.0 blue:34.0/255.0 alpha:1.0].CGColor];
-    [actionButton.layer setBackgroundColor:[UIColor blackColor].CGColor];
+    [actionButton.layer setBackgroundColor:[UIColor colorWithRed:92.0/255.0 green:92.0/255.0 blue:92.0/255.0 alpha:1.0].CGColor];
+//    [actionButton.layer setBackgroundColor:[UIColor blackColor].CGColor];
     
     [actionButton.layer setBorderWidth:3];
     [actionButton.layer setMasksToBounds:YES];
@@ -695,7 +818,7 @@ bail:
     if ([session isRunning])
     {
         [actionButton.layer setBackgroundColor:[UIColor redColor].CGColor];
-        bool *hideSaveButton = NO;
+        BOOL *hideSaveButton = NO;
         // Find out the current orientation and tell the still image output.
         AVCaptureConnection *stillImageConnection = [stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
         UIDeviceOrientation curDeviceOrientation = [[UIDevice currentDevice] orientation];
@@ -741,7 +864,7 @@ bail:
         
         
         [session stopRunning];
-        [sender setTitle: @"Again?" forState:UIControlStateNormal];
+        [sender setTitle: @"Video" forState:UIControlStateNormal];
         
         flashView = [[UIView alloc] initWithFrame:[previewView frame]];
         [flashView setBackgroundColor:[UIColor whiteColor]];
@@ -769,11 +892,10 @@ bail:
     }
     else
     {
-//        [actionButton.layer setBackgroundColor:[UIColor colorWithRed:34.0/255.0 green:34.0/255.0 blue:34.0/255.0 alpha:1.0].CGColor];
-        [actionButton.layer setBackgroundColor:[UIColor blackColor].CGColor];
+        [actionButton.layer setBackgroundColor:[UIColor colorWithRed:92.0/255.0 green:92.0/255.0 blue:92.0/255.0 alpha:1.0].CGColor];
         [self.saveImage setHidden:YES];
         [session startRunning];
-        [sender setTitle: @"Spot" forState:UIControlStateNormal];
+        [sender setTitle: @"Snap" forState:UIControlStateNormal];
     }
 }
 
