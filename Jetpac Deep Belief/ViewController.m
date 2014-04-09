@@ -768,7 +768,7 @@ bail:
         [actionButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [actionButton setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.5] forState:UIControlStateHighlighted];
         [actionButton.layer setBorderColor:[UIColor whiteColor].CGColor];
-        [sender setTitle: @"Video" forState:UIControlStateNormal];
+        [sender setTitle: @"Back" forState:UIControlStateNormal];
         
         flashView = [[UIView alloc] initWithFrame:[previewView frame]];
         [flashView setBackgroundColor:[UIColor whiteColor]];
