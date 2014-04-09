@@ -98,9 +98,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 	// Do any additional setup after loading the view, typically from a nib.
     
     [[UIApplication sharedApplication] setStatusBarHidden: NO withAnimation:UIStatusBarAnimationSlide];
-//    [self.view setBackgroundColor:[UIColor colorWithRed:73.0/255.0 green:162.0/255.0 blue:191.0/255.0 alpha:1.0]];
-    [self.view setBackgroundColor:[UIColor colorWithRed:34.0/255.0 green:34.0/255.0 blue:34.0/255.0 alpha:1.0]];
-//    [self.view setBackgroundColor:[UIColor blackColor]];
+    [self.view setBackgroundColor:[UIColor colorWithRed:17.0/255.0 green:17.0/255.0 blue:17.0/255.0 alpha:1.0]];
     
     NSString* networkPath = [[NSBundle mainBundle] pathForResource:@"jetpac" ofType:@"ntwk"];
     if (networkPath == NULL)
@@ -223,6 +221,9 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     [actionButton.layer setBackgroundColor:[UIColor blackColor].CGColor];
     [self.saveImage setHidden:YES];
     [session startRunning];
+    [actionButton setTitleColor:[UIColor colorWithRed:137.0/255.0 green:137.0/255.0 blue:137.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+    [actionButton setTitleColor:[UIColor colorWithRed:137.0/255.0 green:137.0/255.0 blue:137.0/255.0 alpha:0.5] forState:UIControlStateHighlighted];
+    [actionButton.layer setBorderColor:[UIColor colorWithRed:92.0/255.0 green:92.0/255.0 blue:92.0/255.0 alpha:1.0].CGColor];
     [actionButton setTitle: @"Snap" forState:UIControlStateNormal];
 }
 
@@ -364,8 +365,9 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     actionButton = [CustomButton buttonWithType:UIButtonTypeCustom];
     [actionButton addTarget:self action:@selector(takePicture:) forControlEvents:UIControlEventTouchUpInside];
     [actionButton setTitle:@"Snap" forState:UIControlStateNormal];
-    [actionButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [actionButton setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.5] forState:UIControlStateHighlighted];
+    
+    [actionButton setTitleColor:[UIColor colorWithRed:137.0/255.0 green:137.0/255.0 blue:137.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+    [actionButton setTitleColor:[UIColor colorWithRed:137.0/255.0 green:137.0/255.0 blue:137.0/255.0 alpha:0.5] forState:UIControlStateHighlighted];
 
     [actionButton.layer setCornerRadius:37.0];
     [actionButton.layer setBorderColor:[UIColor colorWithRed:92.0/255.0 green:92.0/255.0 blue:92.0/255.0 alpha:1.0].CGColor];
@@ -763,6 +765,9 @@ bail:
         
         
         [session stopRunning];
+        [actionButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [actionButton setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.5] forState:UIControlStateHighlighted];
+        [actionButton.layer setBorderColor:[UIColor whiteColor].CGColor];
         [sender setTitle: @"Video" forState:UIControlStateNormal];
         
         flashView = [[UIView alloc] initWithFrame:[previewView frame]];
@@ -795,6 +800,9 @@ bail:
         [actionButton.layer setBackgroundColor:[UIColor blackColor].CGColor];
         [self.saveImage setHidden:YES];
         [session startRunning];
+        [actionButton setTitleColor:[UIColor colorWithRed:137.0/255.0 green:137.0/255.0 blue:137.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+        [actionButton setTitleColor:[UIColor colorWithRed:137.0/255.0 green:137.0/255.0 blue:137.0/255.0 alpha:0.5] forState:UIControlStateHighlighted];
+        [actionButton.layer setBorderColor:[UIColor colorWithRed:92.0/255.0 green:92.0/255.0 blue:92.0/255.0 alpha:1.0].CGColor];
         [sender setTitle: @"Snap" forState:UIControlStateNormal];
     }
 }
