@@ -219,114 +219,12 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 - (void)appDidEnterForeground:(NSNotification *)notification
 {
 //    NSLog(@"did enter foreground notification");
-    [actionButton.layer setBackgroundColor:[UIColor colorWithRed:92.0/255.0 green:92.0/255.0 blue:92.0/255.0 alpha:1.0].CGColor];
+//    [actionButton.layer setBackgroundColor:[UIColor colorWithRed:92.0/255.0 green:92.0/255.0 blue:92.0/255.0 alpha:1.0].CGColor];
+    [actionButton.layer setBackgroundColor:[UIColor blackColor].CGColor];
     [self.saveImage setHidden:YES];
     [session startRunning];
     [actionButton setTitle: @"Snap" forState:UIControlStateNormal];
 }
-
-
-//At launch, the output looks like this:
-//
-//2013-04-07 09:31:06.505 myapp[15459:11303] view did load
-//2013-04-07 09:31:06.507 myapp[15459:11303] view will appear
-//2013-04-07 09:31:06.511 myapp[15459:11303] app did become active
-//2013-04-07 09:31:06.512 myapp[15459:11303] did become active notification
-//2013-04-07 09:31:06.517 myapp[15459:11303] view did appear
-//Enter the background then reenter the foreground:
-//
-//2013-04-07 09:32:05.923 myapp[15459:11303] app will enter foreground
-//2013-04-07 09:32:05.924 myapp[15459:11303] did enter foreground notification
-//2013-04-07 09:32:05.925 myapp[15459:11303] app did become active
-//2013-04-07 09:32:05.926 myapp[15459:11303] did become active notification
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -470,11 +368,12 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     [actionButton setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.5] forState:UIControlStateHighlighted];
 
     [actionButton.layer setCornerRadius:37.0];
-    [actionButton.layer setBorderColor:[UIColor whiteColor].CGColor];
+    [actionButton.layer setBorderColor:[UIColor colorWithRed:92.0/255.0 green:92.0/255.0 blue:92.0/255.0 alpha:1.0].CGColor];
+//    [actionButton.layer setBorderColor:[UIColor whiteColor].CGColor];
     
 //    [actionButton.layer setBackgroundColor:[UIColor redColor].CGColor];
-    [actionButton.layer setBackgroundColor:[UIColor colorWithRed:92.0/255.0 green:92.0/255.0 blue:92.0/255.0 alpha:1.0].CGColor];
-//    [actionButton.layer setBackgroundColor:[UIColor blackColor].CGColor];
+//    [actionButton.layer setBackgroundColor:[UIColor colorWithRed:92.0/255.0 green:92.0/255.0 blue:92.0/255.0 alpha:1.0].CGColor];
+    [actionButton.layer setBackgroundColor:[UIColor blackColor].CGColor];
     
     [actionButton.layer setBorderWidth:3];
     [actionButton.layer setMasksToBounds:YES];
@@ -892,7 +791,8 @@ bail:
     }
     else
     {
-        [actionButton.layer setBackgroundColor:[UIColor colorWithRed:92.0/255.0 green:92.0/255.0 blue:92.0/255.0 alpha:1.0].CGColor];
+//        [actionButton.layer setBackgroundColor:[UIColor colorWithRed:92.0/255.0 green:92.0/255.0 blue:92.0/255.0 alpha:1.0].CGColor];
+        [actionButton.layer setBackgroundColor:[UIColor blackColor].CGColor];
         [self.saveImage setHidden:YES];
         [session startRunning];
         [sender setTitle: @"Snap" forState:UIControlStateNormal];
