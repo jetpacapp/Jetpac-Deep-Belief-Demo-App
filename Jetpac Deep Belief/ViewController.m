@@ -224,6 +224,8 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     [actionButton setTitleColor:[UIColor colorWithRed:137.0/255.0 green:137.0/255.0 blue:137.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     [actionButton setTitleColor:[UIColor colorWithRed:137.0/255.0 green:137.0/255.0 blue:137.0/255.0 alpha:0.5] forState:UIControlStateHighlighted];
     [actionButton.layer setBorderColor:[UIColor colorWithRed:92.0/255.0 green:92.0/255.0 blue:92.0/255.0 alpha:1.0].CGColor];
+    [actionButton setBackgroundImage:[UIImage imageNamed:@"stillBtn.png"] forState:UIControlStateNormal];
+    [actionButton setBackgroundImage:[UIImage imageNamed:@"stillBtn.png"] forState:UIControlStateHighlighted];
     [actionButton setTitle: @"Snap" forState:UIControlStateNormal];
 }
 
@@ -375,6 +377,8 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     
 //    [actionButton.layer setBackgroundColor:[UIColor redColor].CGColor];
 //    [actionButton.layer setBackgroundColor:[UIColor colorWithRed:92.0/255.0 green:92.0/255.0 blue:92.0/255.0 alpha:1.0].CGColor];
+    [actionButton setBackgroundImage:[UIImage imageNamed:@"stillBtn.png"] forState:UIControlStateNormal];
+    [actionButton setBackgroundImage:[UIImage imageNamed:@"stillBtn.png"] forState:UIControlStateHighlighted];
     [actionButton.layer setBackgroundColor:[UIColor blackColor].CGColor];
     
     [actionButton.layer setBorderWidth:3];
@@ -768,6 +772,8 @@ bail:
         [actionButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [actionButton setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.5] forState:UIControlStateHighlighted];
         [actionButton.layer setBorderColor:[UIColor whiteColor].CGColor];
+        [actionButton setBackgroundImage:[UIImage imageNamed:@"videoBtn.png"] forState:UIControlStateNormal];
+        [actionButton setBackgroundImage:[UIImage imageNamed:@"videoBtn.png"] forState:UIControlStateHighlighted];
         [sender setTitle: @"Back" forState:UIControlStateNormal];
         
         flashView = [[UIView alloc] initWithFrame:[previewView frame]];
@@ -803,6 +809,8 @@ bail:
         [actionButton setTitleColor:[UIColor colorWithRed:137.0/255.0 green:137.0/255.0 blue:137.0/255.0 alpha:1.0] forState:UIControlStateNormal];
         [actionButton setTitleColor:[UIColor colorWithRed:137.0/255.0 green:137.0/255.0 blue:137.0/255.0 alpha:0.5] forState:UIControlStateHighlighted];
         [actionButton.layer setBorderColor:[UIColor colorWithRed:92.0/255.0 green:92.0/255.0 blue:92.0/255.0 alpha:1.0].CGColor];
+        [actionButton setBackgroundImage:[UIImage imageNamed:@"stillBtn.png"] forState:UIControlStateNormal];
+        [actionButton setBackgroundImage:[UIImage imageNamed:@"stillBtn.png"] forState:UIControlStateHighlighted];
         [sender setTitle: @"Snap" forState:UIControlStateNormal];
     }
 }
