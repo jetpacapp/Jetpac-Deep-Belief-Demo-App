@@ -156,12 +156,12 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     if ([iphoneModel  isEqual: @"iPhone3,1"] || [iphoneModel  isEqual: @"iPhone4,1"])
     {
 //        short version
-        CGRect viewFrame = previewView.frame;
-        CGSize newSize = CGSizeMake(viewFrame.size.width, viewFrame.size.height - 90.0);
-        viewFrame.size = newSize;
-        [previewView setFrame:viewFrame];
-        [previewView setBackgroundColor:[UIColor colorWithRed:17.0/255.0 green:17.0/255.0 blue:17.0/255.0 alpha:1.0]];
-        [introView setFrame:viewFrame];
+//        CGRect viewFrame = previewView.frame;
+//        CGSize newSize = CGSizeMake(viewFrame.size.width, viewFrame.size.height - 90.0);
+//        viewFrame.size = newSize;
+//        [previewView setFrame:viewFrame];
+//        [previewView setBackgroundColor:[UIColor colorWithRed:17.0/255.0 green:17.0/255.0 blue:17.0/255.0 alpha:1.0]];
+//        [introView setFrame:viewFrame];
         
         CGRect frame = self.saveImage.frame;
         frame.origin.x = frame.origin.x; // new x coordinate
@@ -790,9 +790,8 @@ bail:
                                                       completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
                                                           if (error)
                                                           {
-                                                              [self displayErrorOnMainQueue:error withMessage:@"Take picture failed"];
+//                                                              [self displayErrorOnMainQueue:error withMessage:@"Take picture failed"];
                                                               __block hideSaveButton = YES;
-                                                              NSLog(@"woah!");
                                                           }
                                                           else
                                                           {
