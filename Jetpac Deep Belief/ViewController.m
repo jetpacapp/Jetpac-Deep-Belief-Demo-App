@@ -1035,12 +1035,93 @@ bail:
             [newValues setObject: valueObject forKey: labelObject];
         }
     }
-    dispatch_async(dispatch_get_main_queue(), ^(void) {
-        if ([introView isHidden])
+    
+    if ([newValues count] == 0)
+    {
+        const float predictionValue = 0.0f;
+        char* label = [@"" UTF8String];
+        NSString* labelObject = [NSString stringWithCString: label];
+        NSNumber* valueObject = [NSNumber numberWithFloat: predictionValue];
+        [newValues setObject: valueObject forKey: labelObject];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if ([introView isHidden])
+            {
+                [self setEmptyPredictionValue: newValues];
+            }
+        });
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if ([introView isHidden])
+            {
+                [self setPredictionValues: newValues];
+            }
+        });
+    }
+}
+
+- (void)setEmptyPredictionValue: (NSDictionary *)newValues
+{
+    NSArray* candidateLabels = [NSMutableArray array];
+    for (NSString* label in newValues)
+    {
+        NSNumber* oldPredictionValueObject = [newValues objectForKey:label];
+        const float oldPredictionValue = [oldPredictionValueObject floatValue];
+        NSDictionary *entry = @{
+                                @"label" : label,
+                                @"value" : oldPredictionValueObject
+                                };
+        candidateLabels = [candidateLabels arrayByAddingObject: entry];
+    }
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"value" ascending:NO];
+    NSArray* sortedLabels = [candidateLabels sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
+    
+    const float leftMargin = 10.0f;
+    const float topMargin = 65.0f;
+    
+    const float valueWidth = 48.0f;
+    const float valueHeight = 26.0f;
+    
+    const float labelWidth = 246.0f;
+    const float labelHeight = 26.0f;
+    
+    const float labelMarginX = 5.0f;
+    const float labelMarginY = 5.0f;
+    
+    [self removeAllLabelLayers];
+    
+    int labelCount = 0;
+    for (NSDictionary* entry in sortedLabels)
+    {
+        NSString *label = [entry objectForKey: @"label"];
+        NSNumber *valueObject = [entry objectForKey: @"value"];
+        const float value = [valueObject floatValue];
+        
+        const float originY = (topMargin + ((labelHeight + labelMarginY) * labelCount));
+        
+        const int valuePercentage = (int)roundf(value * 100.0f);
+        
+        const float valueOriginX = leftMargin;
+        NSString* valueText = [NSString stringWithFormat:@"%d%%", valuePercentage];
+        
+        [self addLabelLayerWithText:valueText
+                            originX:valueOriginX originY:originY
+                              width:valueWidth height:valueHeight
+                          alignment: kCAAlignmentRight];
+        
+        const float labelOriginX = (leftMargin + valueWidth + labelMarginX);
+        
+        [self addLabelLayerWithText: [label capitalizedString]
+                            originX: labelOriginX originY: originY
+                              width: labelWidth height: labelHeight
+                          alignment:kCAAlignmentLeft];
+        
+        labelCount += 1;
+        if (labelCount > 4)
         {
-            [self setPredictionValues: newValues];
+            break;
         }
-    });
+    }
 }
 
 - (void)setPredictionValues: (NSDictionary*) newValues
@@ -1107,21 +1188,12 @@ bail:
     const float labelMarginY = 5.0f;
     
     [self removeAllLabelLayers];
-    
-//    if ([sortedLabels count] > 0)
-//    {
-//        [gradientLayer setHidden:NO];
-//    }
-//    else
-//    {
-//        [gradientLayer setHidden:YES];
-//    }
-    
+
     int labelCount = 0;
     for (NSDictionary* entry in sortedLabels)
     {
-        NSString* label = [entry objectForKey: @"label"];
-        NSNumber* valueObject =[entry objectForKey: @"value"];
+        NSString *label = [entry objectForKey: @"label"];
+        NSNumber *valueObject = [entry objectForKey: @"value"];
         const float value = [valueObject floatValue];
         
         const float originY = (topMargin + ((labelHeight + labelMarginY) * labelCount));
