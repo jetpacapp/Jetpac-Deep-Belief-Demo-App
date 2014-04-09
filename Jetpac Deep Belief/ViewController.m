@@ -256,7 +256,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 
 - (void)dealloc
 {
-//    [self teardownAVCapture];
+    [self teardownAVCapture];
 }
 
 - (IBAction)switchCameras:(id)sender
