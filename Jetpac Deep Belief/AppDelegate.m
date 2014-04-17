@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "KISSMetricsAPI.h"
 
 @implementation AppDelegate
 
@@ -18,6 +19,8 @@
     [self.window makeKeyAndVisible];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+
+    [KISSMetricsAPI sharedAPIWithKey:@"xxxxxxxxxxxxxxxxxxxxxxxxxxxx"];
 
     return YES;
 }

@@ -16,6 +16,7 @@
 #include <sys/time.h>
 #import <sys/utsname.h>
 #import "QuartzCore/QuartzCore.h"
+#import "KISSMetricsAPI.h"
 
 #import <DeepBelief/DeepBelief.h>
 
@@ -143,6 +144,9 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     [self.saveImage setHidden:YES];
 
     [self.view bringSubviewToFront:introView];
+    
+    NSDictionary *myEventProperties = [[NSDictionary alloc] initWithObjectsAndKeys:@"viewDidLoad", @"true", nil];
+    [[KISSMetricsAPI sharedAPI] recordEvent:@"iOS Event" withProperties:myEventProperties];
 
     [NSTimer scheduledTimerWithTimeInterval:5.0
                                      target:self
@@ -172,6 +176,9 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     } else {
 //        tall version
     }
+    
+    NSDictionary *myEventProperties = [[NSDictionary alloc] initWithObjectsAndKeys:@"Phone Model", iphoneModel, nil];
+    [[KISSMetricsAPI sharedAPI] recordEvent:@"Phone Model" withProperties:myEventProperties];
 }
 
 - (NSString*)machineName
@@ -219,7 +226,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     CAGradientLayer *gradient = [CAGradientLayer layer];
     
     gradient.frame = previewView.bounds;
-    [gradient setFrame:CGRectMake(0, 0, previewView.bounds.size.width, previewView.bounds.size.height / 2.0)];
+    [gradient setFrame:CGRectMake(0, 0, previewView.bounds.size.width, previewView.bounds.size.height / 3.0)];
     [gradient setColors:[NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor clearColor] CGColor], nil]];
     [gradientLayer.layer insertSublayer:gradient atIndex:0];
     [previewView addSubview:gradientLayer];
@@ -236,22 +243,30 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 {
     [super viewWillAppear:animated];
 //    NSLog(@"view will appear");
+    NSDictionary *myEventProperties = [[NSDictionary alloc] initWithObjectsAndKeys:@"viewWillAppear", @"true", nil];
+    [[KISSMetricsAPI sharedAPI] recordEvent:@"iOS Event" withProperties:myEventProperties];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
 //    NSLog(@"view did appear");
+    NSDictionary *myEventProperties = [[NSDictionary alloc] initWithObjectsAndKeys:@"viewDidAppear", @"true", nil];
+    [[KISSMetricsAPI sharedAPI] recordEvent:@"iOS Event" withProperties:myEventProperties];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
+    NSDictionary *myEventProperties = [[NSDictionary alloc] initWithObjectsAndKeys:@"viewWillDisappear", @"true", nil];
+    [[KISSMetricsAPI sharedAPI] recordEvent:@"iOS Event" withProperties:myEventProperties];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
 	[super viewDidDisappear:animated];
+    NSDictionary *myEventProperties = [[NSDictionary alloc] initWithObjectsAndKeys:@"viewDidDisappear", @"true", nil];
+    [[KISSMetricsAPI sharedAPI] recordEvent:@"iOS Event" withProperties:myEventProperties];
 }
 
 - (void)didReceiveMemoryWarning
@@ -263,6 +278,8 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 - (void)appDidBecomeActive:(NSNotification *)notification
 {
 //    NSLog(@"did become active notification");
+    NSDictionary *myEventProperties = [[NSDictionary alloc] initWithObjectsAndKeys:@"appDidBecomeActive", @"true", nil];
+    [[KISSMetricsAPI sharedAPI] recordEvent:@"iOS Event" withProperties:myEventProperties];
 }
 
 - (void)appDidEnterForeground:(NSNotification *)notification
@@ -278,6 +295,9 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     [actionButton setBackgroundImage:[UIImage imageNamed:@"stillBtn.png"] forState:UIControlStateNormal];
     [actionButton setBackgroundImage:[UIImage imageNamed:@"stillBtn.png"] forState:UIControlStateHighlighted];
     [actionButton setTitle: @"Snap" forState:UIControlStateNormal];
+    
+    NSDictionary *myEventProperties = [[NSDictionary alloc] initWithObjectsAndKeys:@"appDidEnterForeground", @"true", nil];
+    [[KISSMetricsAPI sharedAPI] recordEvent:@"iOS Event" withProperties:myEventProperties];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -327,6 +347,9 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 		[previewLayer setAffineTransform:CGAffineTransformMakeScale(effectiveScale, effectiveScale)];
 		[CATransaction commit];
 	}
+    
+    NSDictionary *myEventProperties = [[NSDictionary alloc] initWithObjectsAndKeys:@"pinchGesture", @"true", nil];
+    [[KISSMetricsAPI sharedAPI] recordEvent:@"Gesture" withProperties:myEventProperties];
 }
 
 - (void)dealloc
@@ -723,6 +746,7 @@ bail:
 
     UIView *fakeView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, previewView.bounds.size.width, previewView.bounds.size.height)];
     UIImageView * screenshotView = [[UIImageView alloc] initWithImage:screenshot];
+    [screenshotView setFrame:fakeView.frame];
     [fakeView addSubview:screenshotView];
     [previewView addSubview:fakeView];
     
@@ -744,6 +768,9 @@ bail:
     [fakeView removeFromSuperview];
     
     [self.saveImage setBackgroundImage:[UIImage imageNamed:@"Nav_Share_Saved@2x.png"] forState:UIControlStateNormal];
+    
+    NSDictionary *myEventProperties = [[NSDictionary alloc] initWithObjectsAndKeys:@"savePicture", @"true", nil];
+    [[KISSMetricsAPI sharedAPI] recordEvent:@"Save Picture" withProperties:myEventProperties];
 }
 
 - (void)writeImageCompletion:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
@@ -761,10 +788,14 @@ bail:
 //        [self displayErrorOnMainQueue:error withMessage:@"Save picture failed"];
         [alert setTitle:@"Image Save Failed"];
         [alert setMessage:@"Something went wrong saving the image. Check the app permissions."];
+        NSDictionary *myEventProperties = [[NSDictionary alloc] initWithObjectsAndKeys:@"writeImageCompletion", @"false", nil];
+        [[KISSMetricsAPI sharedAPI] recordEvent:@"Image Event" withProperties:myEventProperties];
     }
     else
     {
 //        NSLog(@"here - worked");
+        NSDictionary *myEventProperties = [[NSDictionary alloc] initWithObjectsAndKeys:@"writeImageCompletion", @"true", nil];
+        [[KISSMetricsAPI sharedAPI] recordEvent:@"Image Event" withProperties:myEventProperties];
     }
     [alert show];
 }
@@ -850,6 +881,9 @@ bail:
          ];
         [self.saveImage setHidden:hideSaveButton];
         [self.saveImage setBackgroundImage:[UIImage imageNamed:@"Nav_Share@2x.png"] forState:UIControlStateNormal];
+        
+        NSDictionary *myEventProperties = [[NSDictionary alloc] initWithObjectsAndKeys:@"takePicture", @"true", nil];
+        [[KISSMetricsAPI sharedAPI] recordEvent:@"Main Button Event" withProperties:myEventProperties];
     }
     else
     {
@@ -863,6 +897,9 @@ bail:
         [actionButton setBackgroundImage:[UIImage imageNamed:@"stillBtn.png"] forState:UIControlStateNormal];
         [actionButton setBackgroundImage:[UIImage imageNamed:@"stillBtn.png"] forState:UIControlStateHighlighted];
         [sender setTitle: @"Snap" forState:UIControlStateNormal];
+        
+        NSDictionary *myEventProperties = [[NSDictionary alloc] initWithObjectsAndKeys:@"resumeVideo", @"true", nil];
+        [[KISSMetricsAPI sharedAPI] recordEvent:@"Main Button Event" withProperties:myEventProperties];
     }
 }
 

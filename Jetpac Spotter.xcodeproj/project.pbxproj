@@ -44,6 +44,7 @@
 		A3EC663318F4AE7F00D4E1D7 /* Nav_Share_Saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3EC663218F4AE7F00D4E1D7 /* Nav_Share_Saved@2x.png */; };
 		A3EC663618F4C5F400D4E1D7 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = A3EC663418F4C5F400D4E1D7 /* iTunesArtwork.png */; };
 		A3EC663718F4C5F400D4E1D7 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3EC663518F4C5F400D4E1D7 /* iTunesArtwork@2x.png */; };
+		A3F48A2419003CB700CF29CC /* KISSMetricsAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F48A2319003CB700CF29CC /* KISSMetricsAPI.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,8 @@
 		A3EC663218F4AE7F00D4E1D7 /* Nav_Share_Saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Nav_Share_Saved@2x.png"; sourceTree = "<group>"; };
 		A3EC663418F4C5F400D4E1D7 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
 		A3EC663518F4C5F400D4E1D7 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
+		A3F48A2219003CB700CF29CC /* KISSMetricsAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KISSMetricsAPI.h; sourceTree = "<group>"; };
+		A3F48A2319003CB700CF29CC /* KISSMetricsAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KISSMetricsAPI.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +174,8 @@
 				A3DB185718EF69660029E082 /* AppDelegate.m */,
 				A3DB185F18EF69660029E082 /* ViewController.h */,
 				A3DB186018EF69660029E082 /* ViewController.m */,
+				A3F48A2219003CB700CF29CC /* KISSMetricsAPI.h */,
+				A3F48A2319003CB700CF29CC /* KISSMetricsAPI.m */,
 				A3DB186218EF69660029E082 /* Images.xcassets */,
 				A3DB184E18EF69660029E082 /* Supporting Files */,
 			);
@@ -336,6 +341,7 @@
 			files = (
 				A33BB0F418EF797800728D04 /* CustomButton.m in Sources */,
 				A3DB186118EF69660029E082 /* ViewController.m in Sources */,
+				A3F48A2419003CB700CF29CC /* KISSMetricsAPI.m in Sources */,
 				A3DB185818EF69660029E082 /* AppDelegate.m in Sources */,
 				A3DB185418EF69660029E082 /* main.mm in Sources */,
 			);
