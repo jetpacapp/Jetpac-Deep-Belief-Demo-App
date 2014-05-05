@@ -209,6 +209,19 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     [timer invalidate];
     timer = nil;
     
+    if (![introView isHidden])
+    {
+        [self finishThingsUp];
+    }
+}
+
+- (IBAction)closeInstructions:(id)sender
+{
+    [self finishThingsUp];
+}
+
+- (void)finishThingsUp
+{
     [introView setHidden:YES];
     [introView removeFromSuperview];
     
@@ -763,26 +776,24 @@ bail:
     
 //    UIImageWriteToSavedPhotosAlbum(tempScreenshot, self, @selector(writeImageCompletion:didFinishSavingWithError:contextInfo:), nil);
     
-    NSString* textToShare = @"Check out @JetpacApp's Demo of Deep Belief on iOS";
+    NSString* textToShare = @"Check out @JetpacApp Object Recognition www.jetpac.com/deepbelief #SpotterWin or #SpotterFail";
     NSArray* itemsToShare = @[textToShare, tempScreenshot];
     UIActivityViewController* activityVC = [[UIActivityViewController alloc] initWithActivityItems:itemsToShare applicationActivities:nil];
-    activityVC.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList];
+    activityVC.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypePostToVimeo, UIActivityTypeAirDrop];
     [self presentViewController:activityVC animated:YES completion: nil];
     [activityVC setCompletionHandler:^(NSString* activityType, BOOL completed) {
         NSLog(@"Activity = %@", activityType);
         NSLog(@"Completed status = %d", completed);
         NSString* cmpltd = [NSString stringWithFormat:@"%d", completed];
-        
-        [[KISSMetricsAPI sharedAPI] recordEvent:@"iOS Share Activity" withProperties:@{@"activity" : activityType, @"completed" : cmpltd}];
-        
-//        if (completed)
-//        {
-//            [[KISSMetricsAPI sharedAPI] recordEvent:@"iOS Share Activity" withProperties:@{@"activity" : activityType, @"completed" : cmpltd}];
-//        }
-//        else
-//        {
-//            [[KISSMetricsAPI sharedAPI] recordEvent:@"iOS Share Activity" withProperties:@{@"activity" : activityType, @"completed" : cmpltd}];
-//        }
+
+        if (completed)
+        {
+            [[KISSMetricsAPI sharedAPI] recordEvent:@"iOS Share Activity" withProperties:@{@"activity" : activityType, @"completed" : cmpltd}];
+        }
+        else
+        {
+            [[KISSMetricsAPI sharedAPI] recordEvent:@"iOS Share Activity" withProperties:@{@"activity" : @"cancelled", @"completed" : cmpltd}];
+        }
     }];
     
     [self.saveImage setHidden:NO];

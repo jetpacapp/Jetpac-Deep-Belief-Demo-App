@@ -44,6 +44,7 @@
 @property (retain, nonatomic) CATextLayer *predictionTextLayer;
 @property (weak, nonatomic) IBOutlet UIButton *saveImage;
 
+- (IBAction)closeInstructions:(id)sender;
 - (IBAction)takePicture:(id)sender;
 - (IBAction)switchCameras:(id)sender;
 - (IBAction)handlePinchGesture:(UIGestureRecognizer *)sender;
