@@ -771,13 +771,13 @@ bail:
 
     UIGraphicsBeginImageContext(self.view.bounds.size);
     [[self.view layer] renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *tempScreenshot = UIGraphicsGetImageFromCurrentImageContext();
+    saveableScreenshot = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-//    UIImageWriteToSavedPhotosAlbum(tempScreenshot, self, @selector(writeImageCompletion:didFinishSavingWithError:contextInfo:), nil);
+//    UIImageWriteToSavedPhotosAlbum(saveableScreenshot, self, @selector(writeImageCompletion:didFinishSavingWithError:contextInfo:), nil);
     
     NSString* textToShare = @"Check out @JetpacApp Object Recognition www.jetpac.com/deepbelief #SpotterWin or #SpotterFail";
-    NSArray* itemsToShare = @[textToShare, tempScreenshot];
+    NSArray* itemsToShare = @[textToShare, saveableScreenshot];
     UIActivityViewController* activityVC = [[UIActivityViewController alloc] initWithActivityItems:itemsToShare applicationActivities:nil];
     activityVC.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypePostToVimeo, UIActivityTypeAirDrop];
     [self presentViewController:activityVC animated:YES completion: nil];

@@ -28,6 +28,7 @@
 	AVCaptureStillImageOutput *stillImageOutput;
 	UIView *flashView;
     UIImage *screenshot;
+    UIImage *saveableScreenshot;
     CustomButton *actionButton;
     
     void* network;
